@@ -13,6 +13,14 @@ class Tweet < ApplicationRecord
       super
     end
   end
+
+  def original_user
+    if source_tweet
+      source_tweet.user.name
+    else
+      super
+    end
+  end
   
   def retweet_count
     Tweet.where.not(retweet_id: nil).where(retweet_id: self.id).count
