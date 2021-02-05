@@ -1,21 +1,25 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Twitter</h1>
-<br>
+<br><br>
 <%= render 'tweets/form', tweet: @tweet %>
-<br><br><br>
+<br><br>
   <% @tweets.each do |tweet| %>
     <p><%= image_tag tweet.user.picture, :class=> "img-circular" %> •
     <%= tweet.user.name %> •
     <%= time_ago_in_words(tweet.created_at) %> ago</p>
     <h3><%= tweet.content %></h3>
-
+    <% if tweet.retweet_id != nil %>
+      <p>Author: <%= tweet.original_user %></p>
+    <% end %>
+   
     <% if user_signed_in? %>
       <% if tweet.retweeted?(current_user) %>
         <%= button_to "Retweet", retweet_tweet_path(tweet), disabled:true %>
         <%= tweet.retweet_count %>
       <% else %>
-      <%= button_to "Retweet", retweet_tweet_path(tweet)%>
+
+        <%= button_to "Retweet", retweet_tweet_path(tweet)%>
         <%= tweet.retweet_count %>
       <% end %>
     <% end %>
