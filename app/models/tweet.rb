@@ -3,7 +3,7 @@ class Tweet < ApplicationRecord
   belongs_to :source_tweet, optional: true, inverse_of: :retweets, class_name: 'Tweet', foreign_key: 'retweet_id'
   has_many :retweets, inverse_of: :source_tweet, class_name: 'Tweet', foreign_key: 'retweet_id', dependent: :destroy
   has_many :likes, dependent: :destroy
-  validates_length_of :content, :within => 1..140, :too_long => "Tweets can't be over 140 characters", :too_short => "Tweets can't be blank"
+  validates_length_of :content, :within => 1..140, :too_long => "can't be over 140 characters", :too_short => "can't be blank"
   
   def content
     if source_tweet
