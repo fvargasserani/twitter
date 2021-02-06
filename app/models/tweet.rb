@@ -37,5 +37,8 @@ class Tweet < ApplicationRecord
   def liked?(user)
     !!self.likes.find{|like| like.user_id == user.id}
   end
-  
+
+  def tweet_likes
+    Like.joins(:tweet).where(tweet_id: id)
+  end
 end

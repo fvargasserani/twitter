@@ -5,6 +5,10 @@
 <%= time_ago_in_words(@tweet.created_at) %> ago</p>
 <h3><%= @tweet.content %></h3>
 
+  <% if @tweet.retweet_id != nil %>
+    <p>Author: <%= @tweet.original_user %></p>
+  <% end %>
+
 <% if user_signed_in? %>
   <% if @tweet.retweeted?(current_user) %>
     <%= button_to "Retweet", retweet_tweet_path(@tweet), disabled:true %>
@@ -18,14 +22,21 @@
 <br>
 
 <% if user_signed_in? %>
+
   <% if @tweet.liked?(current_user) %>
     <%= button_to "Like", like_tweet_path(@tweet), disabled:true %>
     <%= @tweet.like_count %>
   <% else %>
     <%= button_to "Like", like_tweet_path(@tweet)%>
     <%= @tweet.like_count %>
+  <% end %><br>
+
+  <% @tweet.tweet_likes.each do |tweet| %>
+    <%= image_tag tweet.users_who_liked, :class=> "img-circular"%>
   <% end %>
+
 <% end %>
+
 
 <br>
 

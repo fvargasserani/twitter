@@ -26,6 +26,7 @@ class TweetsController < ApplicationController
 
   # GET /tweets/1 or /tweets/1.json
   def show
+    @likes = Like.joins(:user)
   end
 
   # GET /tweets/new
