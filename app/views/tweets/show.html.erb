@@ -35,11 +35,13 @@
     <%= image_tag tweet.users_who_liked, :class=> "img-circular"%>
   <% end %>
 
+  <br><br>
+
+  <% if current_user == @tweet.user %>
+    <%= link_to 'Edit', edit_tweet_path(@tweet) %>
+    <%= link_to 'Destroy', tweet_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+
 <% end %>
 
-
-<br>
-
-<%= link_to 'Edit', edit_tweet_path(@tweet) %>
-<%= link_to 'Destroy', @tweet, method: :delete, data: { confirm: 'Are you sure?' } %>
 <%= link_to 'Back', root_path %>

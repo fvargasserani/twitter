@@ -19,7 +19,6 @@
         <%= button_to "Retweet", retweet_tweet_path(tweet), disabled:true %>
         <%= tweet.retweet_count %>
       <% else %>
-
         <%= button_to "Retweet", retweet_tweet_path(tweet)%>
         <%= tweet.retweet_count %>
       <% end %>
@@ -38,10 +37,15 @@
     <% end %>
 
     <br>
-
-    <%= link_to 'Edit', edit_tweet_path(tweet) %>
-    <%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %><br><br><br>
+    <% if user_signed_in? %>
+      <% if current_user == tweet.user %>
+        <%= link_to 'Edit', edit_tweet_path(tweet) %>
+        <%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    <% end %>
   <% end %>
+
+  <br>
 
   <%= link_to_next_page @tweets, 'Next Page' %>
   <%= link_to_previous_page @tweets, 'Previous Page' %>

@@ -40,9 +40,14 @@
 
     <br>
 
-    <%= link_to 'Edit', edit_tweet_path(tweet) %>
-      <%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %><br><br><br>
+    <% if user_signed_in? %>
+    <% if current_user == tweet.user %>
+      <%= link_to 'Edit', edit_tweet_path(tweet) %>
+      <%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
+  <% end %>
+
+<% end %>
   </div>
 
   <%= link_to_next_page @tweets, 'Next Page' %>
