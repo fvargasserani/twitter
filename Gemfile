@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-#pagination
+# pagination
 gem 'kaminari'
 
-#authentication
+# authentication
 gem 'devise'
 
 ruby '2.7.0'
