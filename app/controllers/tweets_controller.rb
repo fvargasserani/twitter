@@ -21,10 +21,6 @@ class TweetsController < ApplicationController
   
   def index
     @tweets = Tweet.order('created_at DESC').page(params[:page]).per(50)
-    respond_to do |format|
-      format.html
-      format.js
-    end
     @tweet = Tweet.new
   end
 
